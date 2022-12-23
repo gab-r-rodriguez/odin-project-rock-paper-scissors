@@ -1,51 +1,50 @@
-// declare variables for player's choice and computer's choice
-let playerSelection = prompt('rock, paper, or scissors?');
-let playerChoice = playerSelection.toLowerCase(); // account for case sensitive inputs
-const gameChoices = ['rock', 'paper', 'scissors'];
-let computerSelection = getComputerChoice();
-
-// record a score for each round played
-let playerScore = 0;
-let computerScore = 0;
-
-// randomly select a game choice for the computer
+// make random choice for computer
 function getComputerChoice() {
+    const gameChoices = ['rock', 'paper', 'scissors'];
     const computerChoice = gameChoices[Math.floor(Math.random() * gameChoices.length)];
     return computerChoice;
 }
 
-// return a string that declares a winner
+// play a single round
 function playRound(playerChoice, computerSelection) {
+    // store round result and player-computer scores
     let roundResult = '';
+    let playerScore = 0;
+    let computerScore = 0;
 
+    // player wins
     if ((playerChoice == 'rock' && computerSelection == 'scissors') ||
         (playerChoice == 'scissors' && computerSelection == 'paper') ||
         (playerChoice == 'paper' && computerSelection == 'rock')) {
         roundResult = 'You win';
         playerScore = playerScore + 1;
     }
-
+    // computer wins
     else if ((playerChoice == 'rock' && computerSelection == 'paper') ||
         (playerChoice == 'scissors' && computerSelection == 'rock') ||
         (playerChoice == 'paper' && computerSelection == 'scissors')) {
         roundResult = 'You lose';
         computerScore = computerScore + 1;
     }
-
+    // draw
     else
         roundResult = 'It was a draw'
-
-    return roundResult, playerScore;
-    return computerScore;
+    // return result of the round
+    return { roundResult, playerScore, computerScore }
 }
 
+// function to play 5 rounds
 function game() {
-    // loop playing game until 5 rounds ends
+    // loop the round 5 times
     for (let i = 1; i < 6; i++) {
-        playRound(playerSelection, computerSelection);
+        // get input from player each round
+        let playerChoice = prompt('rock, paper, or scissors?').toLowerCase();
+        // get new computer input each round
+        let computerSelection = getComputerChoice();
+        // play the round
+        playRound(playerChoice, computerSelection);
+        // display result of each round
     }
-
-    // keep a score
-    return 
+    // return outcome of the whole game
 
 }
