@@ -1,3 +1,8 @@
+// store scores and results of each round
+let roundResult = '';
+let playerScore = 0;
+let computerScore = 0;
+
 // make random choice for computer
 function getComputerChoice() {
     const gameChoices = ['rock', 'paper', 'scissors'];
@@ -5,12 +10,8 @@ function getComputerChoice() {
     return computerChoice;
 }
 
-// play a single round
+// play a single round using inputs from game() function
 function playRound(playerChoice, computerSelection) {
-    // store round result and player-computer scores
-    let roundResult = '';
-    let playerScore = 0;
-    let computerScore = 0;
 
     // player wins
     if ((playerChoice == 'rock' && computerSelection == 'scissors') ||
@@ -43,8 +44,10 @@ function game() {
         let computerSelection = getComputerChoice();
         // play the round
         playRound(playerChoice, computerSelection);
-        // display result of each round
+        // log results and show to user
+        console.log(roundResult, playerScore, computerScore);
+        alert(roundResult);
     }
-    // return outcome of the whole game
-
+    // return outcome of 5-round game
+    return { playerScore, computerScore }
 }
