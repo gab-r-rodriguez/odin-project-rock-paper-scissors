@@ -2,6 +2,7 @@
 let roundResult = '';
 let playerScore = 0;
 let computerScore = 0;
+let playerChoice = "";
 
 // make random choice for computer
 function getComputerChoice() {
@@ -34,12 +35,41 @@ function playRound(playerChoice, computerSelection) {
     return { roundResult, playerScore, computerScore }
 }
 
+// elements to display score and results in DOM
+const result = document.createElement('div');
+const yourScore = document.createElement('div');
+const opponentScore = document.createElement('div');
+
+// click a button to select a value
+const btns = document.querySelectorAll('#btn');
+
+// loop through the nodelist of items
+btns.forEach((btn) => {
+    // player clicks button to choose, round is played
+    btn.addEventListener('click', () => {
+        let playerChoice = btn.value;
+        let computerSelection = getComputerChoice();
+        
+        playRound(playerChoice, computerSelection);
+
+        result.textContent = (roundResult);
+        displayResults.appendChild(result);
+        
+        yourScore.textContent = `Your score: ${playerScore}`;
+        displayResults.appendChild(yourScore);
+        
+        opponentScore.textContent = `Computer score: ${computerScore}`
+        displayResults.appendChild(opponentScore);
+    });
+});
+
+/*
 // function to play 5 rounds
 function game() {
     // loop the round 5 times
     for (let i = 1; i < 6; i++) {
         // get input from player each round
-        let playerChoice = prompt('rock, paper, or scissors?').toLowerCase();
+        // let playerChoice = prompt('rock, paper, or scissors?').toLowerCase();
         // get new computer input each round
         let computerSelection = getComputerChoice();
         // play the round
@@ -51,3 +81,4 @@ function game() {
     // return outcome of 5-round game
     return { playerScore, computerScore }
 }
+*/
